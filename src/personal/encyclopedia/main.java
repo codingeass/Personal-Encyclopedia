@@ -10,8 +10,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -35,9 +38,9 @@ static JFrame frameMain;
      */
     @SuppressWarnings("unchecked")
      
-    public void search_table(){
-     String search_tag=jTextField1.getText();
-     DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    public void search_table(JTextField field,JCheckBox checkbox1,JCheckBox checkbox2,JTable table){
+     String search_tag=field.getText();
+     DefaultTableModel model = (DefaultTableModel) table.getModel();
         try{
      Class.forName("com.mysql.jdbc.Driver").newInstance();
      Connection con = (Connection)DriverManager.getConnection("jdbc:mysql://localhost/personalenc","root","netbean");
@@ -45,15 +48,15 @@ static JFrame frameMain;
      String query;
      if(!search_tag.equals(""))
      {
-        if(jCheckBox1.isSelected()==false && jCheckBox2.isSelected()==false)
-            jCheckBox1.setSelected(true);  
-        if(jCheckBox1.isSelected()==true && jCheckBox2.isSelected()==false)
-            query = "SELECT * FROM data where tag='"+search_tag+"';";
+        if(checkbox1.isSelected()==false && checkbox2.isSelected()==false)
+            checkbox1.setSelected(true);  
+        if(checkbox1.isSelected()==true && checkbox2.isSelected()==false)
+            query = "SELECT * FROM data where tag like '%"+search_tag+"%';";
         else
-        if(jCheckBox1.isSelected()==false && jCheckBox2.isSelected()==true)
-            query = "SELECT * FROM data where title='"+search_tag+"';";
+        if(checkbox1.isSelected()==false && checkbox2.isSelected()==true)
+            query = "SELECT * FROM data where title like '%"+search_tag+"%';";
         else
-            query = "SELECT * FROM data where title='"+search_tag+"' or tag='"+search_tag+"';";  
+            query = "SELECT * FROM data where title like '%"+search_tag+"%' or tag like'%"+search_tag+"%';";  
      }
      else
        query = "SELECT * FROM data;";
@@ -64,9 +67,7 @@ static JFrame frameMain;
         model.addRow (new Object[] {rs.getString("title"),rs.getInt("id")});   
     rs.close();
      stmt.close();
-     con.close();
-     
-  
+     con.close(); 
   }
   catch(Exception e)
   {
@@ -472,6 +473,15 @@ static JFrame frameMain;
 
         jLabel8.setText("Search Content to Edit");
 
+        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField3KeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField3KeyReleased(evt);
+            }
+        });
+
         jCheckBox3.setText("tag");
 
         jCheckBox4.setText("topic");
@@ -483,10 +493,28 @@ static JFrame frameMain;
 
             },
             new String [] {
-                "Id", "Topic"
+                "Title", "Id"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
+        if (jTable2.getColumnModel().getColumnCount() > 0) {
+            jTable2.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         jButton7.setText("BACK");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -671,13 +699,13 @@ addNewTag.setText(null);// TODO add your handling code here:
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 jFrame2.setVisible(true);
-search_table();
+search_table(jTextField1,jCheckBox1,jCheckBox2,jTable1);
  jTable1.removeColumn(jTable1.getColumnModel().getColumn(1));
 frameMain.setVisible(false);// TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
-     search_table(); 
+     search_table(jTextField1,jCheckBox1,jCheckBox2,jTable1); 
      // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1KeyReleased
 
@@ -727,6 +755,14 @@ System.exit(0);        // TODO add your handling code here:
      jFrame3.setVisible(false);
      jFrame3.dispose();      // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jTextField3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyPressed
+// TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3KeyPressed
+
+    private void jTextField3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyReleased
+  search_table(jTextField3,jCheckBox3,jCheckBox4,jTable2);        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3KeyReleased
 
     /**
      * @param args the command line arguments
