@@ -6,6 +6,9 @@
 
 package personal.encyclopedia;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -39,6 +42,18 @@ static JFrame frameMain;
         jLabel3 = new javax.swing.JLabel();
         username = new javax.swing.JTextField();
         password = new javax.swing.JPasswordField();
+        AddContent = new javax.swing.JFrame();
+        jLabel4 = new javax.swing.JLabel();
+        addnewContent = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        addContent = new javax.swing.JTextArea();
+        addTitle = new javax.swing.JTextField();
+        addClear = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        addAllTag = new javax.swing.JTextField();
+        addNewTag = new javax.swing.JTextField();
+        addTag = new javax.swing.JButton();
+        addBack = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -98,6 +113,110 @@ static JFrame frameMain;
                 .addContainerGap(43, Short.MAX_VALUE))
         );
 
+        jLabel4.setText("Add data");
+
+        addnewContent.setText("Add Content");
+        addnewContent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addnewContentActionPerformed(evt);
+            }
+        });
+
+        addContent.setColumns(20);
+        addContent.setRows(5);
+        addContent.setBorder(javax.swing.BorderFactory.createTitledBorder("Content"));
+        jScrollPane1.setViewportView(addContent);
+
+        addTitle.setText("Enter Title Here--");
+        addTitle.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                addTitleFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                addTitleFocusLost(evt);
+            }
+        });
+
+        addClear.setText("Clear");
+        addClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addClearActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Tags :");
+
+        addAllTag.setEditable(false);
+
+        addTag.setText("Add Tag");
+
+        addBack.setText("Back");
+
+        javax.swing.GroupLayout AddContentLayout = new javax.swing.GroupLayout(AddContent.getContentPane());
+        AddContent.getContentPane().setLayout(AddContentLayout);
+        AddContentLayout.setHorizontalGroup(
+            AddContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AddContentLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addGap(32, 32, 32))
+            .addGroup(AddContentLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(AddContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addClear, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE))
+                .addGroup(AddContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AddContentLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(addAllTag, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
+                        .addComponent(addNewTag, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(addTag))
+                    .addGroup(AddContentLayout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(addnewContent, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(63, 63, 63)
+                        .addComponent(addBack, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(135, Short.MAX_VALUE))
+            .addGroup(AddContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(AddContentLayout.createSequentialGroup()
+                    .addGap(21, 21, 21)
+                    .addGroup(AddContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(AddContentLayout.createSequentialGroup()
+                            .addGap(164, 164, 164)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(36, 283, Short.MAX_VALUE))
+                        .addGroup(AddContentLayout.createSequentialGroup()
+                            .addComponent(addTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(0, 0, Short.MAX_VALUE)))))
+        );
+        AddContentLayout.setVerticalGroup(
+            AddContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AddContentLayout.createSequentialGroup()
+                .addGap(118, 118, 118)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addGroup(AddContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addAllTag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addNewTag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addTag))
+                .addGap(42, 42, 42)
+                .addGroup(AddContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addClear, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addnewContent)
+                    .addComponent(addBack))
+                .addContainerGap(37, Short.MAX_VALUE))
+            .addGroup(AddContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(AddContentLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(29, 29, 29)
+                    .addComponent(addTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(539, Short.MAX_VALUE)))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton2.setText("ADD new Content");
@@ -149,6 +268,28 @@ else
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void addnewContentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addnewContentActionPerformed
+                // TODO add your handling code here:
+    }//GEN-LAST:event_addnewContentActionPerformed
+
+    private void addTitleFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_addTitleFocusGained
+        String mk=addTitle.getText();
+        if(mk.equals("Enter Title Here--"))
+        addTitle.setText("");        // TODO add your handling code here:
+    }//GEN-LAST:event_addTitleFocusGained
+
+    private void addTitleFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_addTitleFocusLost
+        String mk=addTitle.getText();
+        if(mk.equals(""))
+        addTitle.setText("Enter Title Here--");
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addTitleFocusLost
+
+    private void addClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addClearActionPerformed
+        addTitle.setText("Enter Title Here--");
+        addContent.setText(null);// TODO add your handling code here:
+    }//GEN-LAST:event_addClearActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -186,6 +327,15 @@ else
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFrame AddContent;
+    private javax.swing.JTextField addAllTag;
+    private javax.swing.JButton addBack;
+    private javax.swing.JButton addClear;
+    private javax.swing.JTextArea addContent;
+    private javax.swing.JTextField addNewTag;
+    private javax.swing.JButton addTag;
+    private javax.swing.JTextField addTitle;
+    private javax.swing.JButton addnewContent;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -194,6 +344,9 @@ else
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPasswordField password;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
