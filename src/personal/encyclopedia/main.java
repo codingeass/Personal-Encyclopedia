@@ -43,9 +43,20 @@ static JFrame frameMain;
      Statement stmt = con.createStatement();
      String query;
      if(!search_tag.equals(""))
-      query = "SELECT * FROM data where title like '%"+search_tag +"%';";
+     {
+        if(jCheckBox1.isSelected()==false && jCheckBox2.isSelected()==false)
+            jCheckBox1.setSelected(true);  
+        if(jCheckBox1.isSelected()==true && jCheckBox2.isSelected()==false)
+            query = "SELECT * FROM data where tag='"+search_tag+"';";
+        else
+        if(jCheckBox1.isSelected()==false && jCheckBox2.isSelected()==true)
+            query = "SELECT * FROM data where title='"+search_tag+"';";
+        else
+            query = "SELECT * FROM data where title='"+search_tag+"' or tag='"+search_tag+"';";  
+     }
      else
        query = "SELECT * FROM data;";
+     
      ResultSet rs = stmt.executeQuery(query);
      model.setRowCount(0);
      while(rs.next())
@@ -577,16 +588,8 @@ frameMain.setVisible(false);// TODO add your handling code here:
      Connection con = (Connection)DriverManager.getConnection("jdbc:mysql://localhost/personalenc","root","netbean");
      Statement stmt = con.createStatement();
      String query;
-     if((jCheckBox1.isSelected()==true && jCheckBox2.isSelected()==false)||(jCheckBox1.isSelected()==false && jCheckBox2.isSelected()==false))
-     query = "SELECT * FROM data where tag='"+ml+"';";
-     else
-     if(jCheckBox1.isSelected()==false && jCheckBox2.isSelected()==true)
-        query = "SELECT * FROM data where title='"+ml+"';";
-     else
-         query = "SELECT * FROM data where title='"+ml+"' or tag='"+ml+"';";
-    if(jCheckBox1.isSelected()==false && jCheckBox2.isSelected()==false)
-       jCheckBox1.setSelected(true);    
-     ResultSet rs = stmt.executeQuery(query);
+        query = "SELECT * FROM data where title='"+ml+"';"; 
+    ResultSet rs = stmt.executeQuery(query);
      while(rs.next())
      jTextArea1.setText(""+rs.getString("content"));
     jTextArea1.setEditable(false);
