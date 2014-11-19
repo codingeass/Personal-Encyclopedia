@@ -232,8 +232,6 @@ static JFrame frameMain;
             }
         });
 
-        addAllTag.setEditable(false);
-
         javax.swing.GroupLayout AddContentLayout = new javax.swing.GroupLayout(AddContent.getContentPane());
         AddContent.getContentPane().setLayout(AddContentLayout);
         AddContentLayout.setHorizontalGroup(
@@ -241,7 +239,7 @@ static JFrame frameMain;
             .addGroup(AddContentLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1)
-                .addGap(32, 32, 32))
+                .addGap(65, 65, 65))
             .addGroup(AddContentLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(AddContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -255,30 +253,29 @@ static JFrame frameMain;
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddContentLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(addAllTag, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(116, 116, 116)))
+                        .addGap(125, 125, 125)))
                 .addGroup(AddContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(addBack, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(AddContentLayout.createSequentialGroup()
                         .addComponent(addNewTag, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(52, 52, 52)
                         .addComponent(addTag)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(58, 58, Short.MAX_VALUE))
             .addGroup(AddContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(AddContentLayout.createSequentialGroup()
-                    .addGap(21, 21, 21)
                     .addGroup(AddContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(AddContentLayout.createSequentialGroup()
-                            .addGap(164, 164, 164)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(36, 324, Short.MAX_VALUE))
+                            .addGap(21, 21, 21)
+                            .addComponent(addTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(AddContentLayout.createSequentialGroup()
-                            .addComponent(addTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, Short.MAX_VALUE)))))
+                            .addGap(185, 185, 185)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGap(0, 141, Short.MAX_VALUE)))
         );
         AddContentLayout.setVerticalGroup(
             AddContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AddContentLayout.createSequentialGroup()
-                .addGap(118, 118, 118)
+                .addGap(115, 115, 115)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addGroup(AddContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -286,7 +283,7 @@ static JFrame frameMain;
                     .addComponent(addTag)
                     .addComponent(addNewTag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addAllTag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                .addGap(45, 45, 45)
                 .addGroup(AddContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addClear, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addnewContent)
@@ -511,6 +508,11 @@ static JFrame frameMain;
                 return canEdit [columnIndex];
             }
         });
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
         if (jTable2.getColumnModel().getColumnCount() > 0) {
             jTable2.getColumnModel().getColumn(1).setResizable(false);
@@ -610,13 +612,13 @@ static JFrame frameMain;
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(62, 62, 62)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         pack();
@@ -747,11 +749,12 @@ System.exit(0);        // TODO add your handling code here:
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
   frameMain.setVisible(false);
+ jTable2.removeColumn(jTable2.getColumnModel().getColumn(1));
   jFrame3.setVisible(true);            // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-   frameMain.setVisible(false);
+   frameMain.setVisible(true);
      jFrame3.setVisible(false);
      jFrame3.dispose();      // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
@@ -763,6 +766,41 @@ System.exit(0);        // TODO add your handling code here:
     private void jTextField3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyReleased
   search_table(jTextField3,jCheckBox3,jCheckBox4,jTable2);        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3KeyReleased
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+     AddContent.setVisible(true);
+     jFrame3.setVisible(false);
+     jFrame3.dispose();
+     jLabel4.setText("Update Text");
+     addnewContent.setText("Update Content");
+     DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+     int r=jTable2.getSelectedRow();
+     Object mk=jTable2.getValueAt(r, 0);
+     addTitle.setText(""+mk);
+      try{
+     Class.forName("com.mysql.jdbc.Driver").newInstance();
+     Connection con = (Connection)DriverManager.getConnection("jdbc:mysql://localhost/personalenc","root","netbean");
+     Statement stmt = con.createStatement();
+     String query;
+      long ml=Long.parseLong(""+model.getValueAt(r, 1));
+      query = "SELECT * FROM data where id="+ml+";"; 
+    ResultSet rs = stmt.executeQuery(query);
+     while(rs.next())
+     {
+        addAllTag.setText(""+rs.getString("tag"));
+        addContent.setText(""+rs.getString("content"));
+     }
+    addContent.setEditable(false);    
+    rs.close();
+     stmt.close();
+     con.close();  
+    }
+  catch(Exception e)
+  {
+      JOptionPane.showMessageDialog(this,"Error in connectivity");
+  } 
+         // TODO add your handling code here:
+    }//GEN-LAST:event_jTable2MouseClicked
 
     /**
      * @param args the command line arguments
