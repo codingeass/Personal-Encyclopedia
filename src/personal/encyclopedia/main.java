@@ -29,6 +29,8 @@ public class main extends javax.swing.JFrame {
     public main() {
         initComponents();
         jFrame1.setVisible(true);
+        jTable2.removeColumn(jTable2.getColumnModel().getColumn(1));
+        jTable1.removeColumn(jTable1.getColumnModel().getColumn(1));
     }
 static JFrame frameMain;
     /**
@@ -74,6 +76,7 @@ static JFrame frameMain;
       JOptionPane.showMessageDialog(this,"Error in connectivity");
   }
     }
+    long id;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -644,11 +647,16 @@ else
         String titl=addTitle.getText();
         String conte=addContent.getText();
         String adTag=addAllTag.getText();
+        String buttonText=addnewContent.getText();        
         try{
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             Connection con = (Connection)DriverManager.getConnection("jdbc:mysql://localhost/personalenc","root","netbean");
             Statement stmt = con.createStatement();
-            String query = "Insert into data (title,content,tag) values('"+titl+"','"+conte+"','"+adTag+"');";
+            String query;
+            if(buttonText.equals("Add Content"))
+                query = "Insert into data (title,content,tag) values('"+titl+"','"+conte+"','"+adTag+"');";
+            else
+                query = "update data set title='"+titl+"' ,content='"+conte+"' ,tag='"+adTag+"' where id="+id+";";
             stmt.executeUpdate(query);
             JOptionPane.showMessageDialog(this,"Record has been inserted");
             stmt.close();
@@ -685,6 +693,8 @@ else
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         frameMain.setVisible(false);
         AddContent.setVisible(true);
+        jLabel4.setText("Add data");
+     addnewContent.setText("Add Content");
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -702,7 +712,6 @@ addNewTag.setText(null);// TODO add your handling code here:
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 jFrame2.setVisible(true);
 search_table(jTextField1,jCheckBox1,jCheckBox2,jTable1);
- jTable1.removeColumn(jTable1.getColumnModel().getColumn(1));
 frameMain.setVisible(false);// TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -749,8 +758,8 @@ System.exit(0);        // TODO add your handling code here:
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
   frameMain.setVisible(false);
- jTable2.removeColumn(jTable2.getColumnModel().getColumn(1));
-  jFrame3.setVisible(true);            // TODO add your handling code here:
+  jFrame3.dispose();
+  jFrame3.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -785,12 +794,12 @@ System.exit(0);        // TODO add your handling code here:
       long ml=Long.parseLong(""+model.getValueAt(r, 1));
       query = "SELECT * FROM data where id="+ml+";"; 
     ResultSet rs = stmt.executeQuery(query);
+    id=ml;
      while(rs.next())
      {
         addAllTag.setText(""+rs.getString("tag"));
         addContent.setText(""+rs.getString("content"));
      }
-    addContent.setEditable(false);    
     rs.close();
      stmt.close();
      con.close();  
