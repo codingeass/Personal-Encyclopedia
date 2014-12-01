@@ -38,6 +38,8 @@ public class main extends javax.swing.JFrame {
         jFrame1.getRootPane().setDefaultButton(jButton1);
         AddContent.getRootPane().setDefaultButton(addnewContent);
         jFrame5.getRootPane().setDefaultButton(jButton11);
+        jFrame6.getRootPane().setDefaultButton(jButton14);
+        jFrame4.getRootPane().setDefaultButton(jButton9);
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
         } catch (InstantiationException | IllegalAccessException | ClassNotFoundException ex) {
@@ -57,6 +59,7 @@ static JFrame frameMain;
     String databasepass="netbean";
     String databaseuser="root";
     String usernam="";
+    String text;
     public void search_table(JTextField field,JCheckBox checkbox1,JCheckBox checkbox2,JTable table){
      String search_tag=field.getText();
      DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -69,15 +72,15 @@ static JFrame frameMain;
         if(checkbox1.isSelected()==false && checkbox2.isSelected()==false)
             checkbox1.setSelected(true);  
         if(checkbox1.isSelected()==true && checkbox2.isSelected()==false)
-            query = "SELECT * FROM data where tag like '%"+search_tag+"%';";
+            query = "SELECT * FROM data where tag like '%"+search_tag+"%' and username='"+usernam+"';";
         else
         if(checkbox1.isSelected()==false && checkbox2.isSelected()==true)
-            query = "SELECT * FROM data where title like '%"+search_tag+"%';";
+            query = "SELECT * FROM data where title like '%"+search_tag+"%' and username='"+usernam+"';";
         else
-            query = "SELECT * FROM data where title like '%"+search_tag+"%' or tag like'%"+search_tag+"%';";  
+            query = "SELECT * FROM data where title like ('%"+search_tag+"%' or tag like'%"+search_tag+"%') and username='"+usernam+"';";  
      }
      else
-       query = "SELECT * FROM data;";
+       query = "SELECT * FROM data where username='"+usernam+"';";
      
      ResultSet rs = stmt.executeQuery(query);
      model.setRowCount(0);
@@ -167,7 +170,6 @@ static JFrame frameMain;
         jLabel18 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
         jButton14 = new javax.swing.JButton();
-        jButton15 = new javax.swing.JButton();
         jButton16 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -175,6 +177,7 @@ static JFrame frameMain;
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -835,6 +838,9 @@ static JFrame frameMain;
                 .addContainerGap())
         );
 
+        jFrame6.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jFrame6.setMinimumSize(new java.awt.Dimension(363, 227));
+
         jLabel15.setText("New Registration ");
 
         jLabel16.setText("Username :");
@@ -849,8 +855,6 @@ static JFrame frameMain;
                 jButton14ActionPerformed(evt);
             }
         });
-
-        jButton15.setText("Cancel");
 
         jButton16.setText("Back");
         jButton16.addActionListener(new java.awt.event.ActionListener() {
@@ -868,26 +872,26 @@ static JFrame frameMain;
                     .addGroup(jFrame6Layout.createSequentialGroup()
                         .addGap(119, 119, 119)
                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jFrame6Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jButton16, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
-                        .addGap(30, 30, 30)
-                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jFrame6Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addGroup(jFrame6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jFrame6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-                                .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jFrame6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField5)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                            .addComponent(jTextField7))))
-                .addContainerGap(30, Short.MAX_VALUE))
+                        .addGroup(jFrame6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jFrame6Layout.createSequentialGroup()
+                                .addGap(13, 13, 13)
+                                .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(70, 70, 70)
+                                .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jFrame6Layout.createSequentialGroup()
+                                .addGroup(jFrame6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jFrame6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                                        .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jFrame6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextField5)
+                                    .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                                    .addComponent(jTextField7))))))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         jFrame6Layout.setVerticalGroup(
             jFrame6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -909,7 +913,6 @@ static JFrame frameMain;
                 .addGap(18, 18, 18)
                 .addGroup(jFrame6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton14)
-                    .addComponent(jButton15)
                     .addComponent(jButton16))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
@@ -959,6 +962,15 @@ static JFrame frameMain;
             }
         });
         jMenu1.add(jMenuItem2);
+
+        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem5.setText("New Registration");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem5);
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setMnemonic('A');
@@ -1053,6 +1065,7 @@ try{
         jFrame1.setVisible(false);
         jFrame1.dispose();
     }
+    rs.close();
     stmt.close();
     con.close();
 }
@@ -1076,7 +1089,7 @@ catch(Exception e)
             Statement stmt = con.createStatement();
             String query;
             if(buttonText.equals("Add Content"))
-                query = "Insert into data (title,content,tag) values('"+titl+"','"+conte+"','"+adTag+"');";
+                query = "Insert into data (title,content,tag,username) values('"+titl+"','"+conte+"','"+adTag+"','"+usernam+"');";
             else
                 query = "update data set title='"+titl+"' ,content='"+conte+"' ,tag='"+adTag+"' where id="+id+";";
             stmt.executeUpdate(query);
@@ -1185,7 +1198,8 @@ System.exit(0);        // TODO add your handling code here:
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
   frameMain.setVisible(false);
   jFrame3.dispose();
-  jFrame3.setVisible(true);// TODO add your handling code here:
+  jFrame3.setVisible(true);
+search_table(jTextField3,jCheckBox3,jCheckBox4,jTable2);   // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -1260,7 +1274,7 @@ System.exit(0);        // TODO add your handling code here:
     private void jButton2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2MouseExited
-String text;
+
     private void addTitleKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_addTitleKeyReleased
    if(addTitle.getText().length()>59)
             addTitle.setText(text);      // TODO add your handling code here:
@@ -1304,73 +1318,73 @@ System.exit(0);        // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
-        frameMain.setVisible(false);
-        AddContent.dispose();
-        AddContent.setVisible(true);
-        jLabel4.setText("Add data");
-     addnewContent.setText("Add Content");        // TODO add your handling code here:
+frameMain.setVisible(false);
+AddContent.dispose();
+AddContent.setVisible(true);
+jLabel4.setText("Add data");
+addnewContent.setText("Add Content");        // TODO add your handling code here:
     }//GEN-LAST:event_jMenu2ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-  frameMain.setVisible(false);
-  jFrame3.dispose();
-  jFrame3.setVisible(true);        // TODO add your handling code here:
+frameMain.setVisible(false);
+jFrame3.dispose();
+jFrame3.setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        String currpass=jPasswordField1.getText();
-        String newpass=jPasswordField2.getText();
-        String conpass=jPasswordField2.getText();        
-        try{
-            Connection con = (Connection)DriverManager.getConnection("jdbc:mysql://localhost/personalenc",databaseuser,databasepass);
-            Statement stmt = con.createStatement();
-            String query;
-            query="Select * from admin where username='"+usernam+"' and password='"+currpass+"';";
-            ResultSet rs = stmt.executeQuery(query);
-            int cout=0;           
-            while(rs.next())
-            {
-             cout++;
-            }
-            if(cout==0)
-            {
-                JOptionPane.showMessageDialog(this,"Entered Wrong Current Password");
-                return;
-            }
-            if(!newpass.equals(conpass))
-            {
-                JOptionPane.showMessageDialog(this,"Password don't Match");
-                return;
-            }
-            int ans=JOptionPane.showConfirmDialog(this, "Are you sure you want to Change Password ?","Option",JOptionPane.YES_NO_OPTION);
-            if(ans!=JOptionPane.YES_OPTION)
-            return;
-            query = "update admin set password='"+newpass+"' where username='"+usernam+"';";
-            stmt.executeUpdate(query);
-            JOptionPane.showMessageDialog(this,"Password has been Updated");
-            jFrame5.dispose();
-            stmt.close();
-            con.close();
-
-        }
-        catch(Exception e)
-        {
-            JOptionPane.showMessageDialog(this,"Error in connectivity");
-        }           // TODO add your handling code here:
+String currpass=jPasswordField1.getText();
+String newpass=jPasswordField2.getText();
+String conpass=jPasswordField2.getText();        
+try{
+    Connection con = (Connection)DriverManager.getConnection("jdbc:mysql://localhost/personalenc",databaseuser,databasepass);
+    Statement stmt = con.createStatement();
+    String query;
+    query="Select * from admin where username='"+usernam+"' and password='"+currpass+"';";
+    ResultSet rs = stmt.executeQuery(query);
+    int cout=0;           
+    while(rs.next())
+    {
+     cout++;
+    }
+    if(cout==0)
+    {
+        JOptionPane.showMessageDialog(this,"Entered Wrong Current Password");
+        return;
+    }
+    if(!newpass.equals(conpass))
+    {
+        JOptionPane.showMessageDialog(this,"Password don't Match");
+        return;
+    }
+    int ans=JOptionPane.showConfirmDialog(this, "Are you sure you want to Change Password ?","Option",JOptionPane.YES_NO_OPTION);
+    if(ans!=JOptionPane.YES_OPTION)
+    return;
+    query = "update admin set password='"+newpass+"' where username='"+usernam+"';";
+    stmt.executeUpdate(query);
+    JOptionPane.showMessageDialog(this,"Password has been Updated");
+    jFrame5.dispose();
+    stmt.close();
+    con.close();
+    rs.close();
+}
+catch(Exception e)
+{
+    JOptionPane.showMessageDialog(this,"Error in connectivity");
+}           // TODO add your handling code here:
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        jFrame5.dispose();
-        jFrame5.setVisible(true);        // TODO add your handling code here:
+jFrame5.dispose();
+jFrame5.setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        jFrame5.dispose();// TODO add your handling code here:
+jFrame5.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
- jFrame1.dispose();
- jFrame6.setVisible(true);// TODO add your handling code here:
+jFrame1.dispose();
+jFrame6.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
@@ -1396,16 +1410,23 @@ try{
     String query;
     query = "Insert into admin values('"+user+"','"+pass+"');";
     stmt.executeUpdate(query);
-    JOptionPane.showMessageDialog(this,"Record has been inserted");
+    JOptionPane.showMessageDialog(this,"Registered successfully");
     stmt.close();
     con.close();
-
+    usernam=user;
+    jFrame6.dispose();
+    frameMain.setVisible(true);
 }
 catch(Exception e)
 {
     JOptionPane.showMessageDialog(this,"Invalid Entry");
 }         // TODO add your handling code here:
     }//GEN-LAST:event_jButton14ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+jFrame6.setVisible(true);
+frameMain.setVisible(false);// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1459,7 +1480,6 @@ catch(Exception e)
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -1504,6 +1524,7 @@ catch(Exception e)
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField jPasswordField1;
