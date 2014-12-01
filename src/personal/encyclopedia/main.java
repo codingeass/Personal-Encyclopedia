@@ -13,10 +13,12 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JCheckBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -35,6 +37,11 @@ public class main extends javax.swing.JFrame {
         jTable1.removeColumn(jTable1.getColumnModel().getColumn(1));
         jFrame1.getRootPane().setDefaultButton(jButton1);
         AddContent.getRootPane().setDefaultButton(addnewContent);
+        jFrame5.getRootPane().setDefaultButton(jButton11);
+        jFrame5.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+    .put(KeyStroke.getKeyStroke("ENTER"), "none");
+        jFrame5.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+    .put(KeyStroke.getKeyStroke("released ENTER"), "press");
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
         } catch (InstantiationException ex) {
@@ -57,6 +64,7 @@ static JFrame frameMain;
      long id;
     String databasepass="netbean";
     String databaseuser="root";
+    String usernam="";
     public void search_table(JTextField field,JCheckBox checkbox1,JCheckBox checkbox2,JTable table){
      String search_tag=field.getText();
      DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -147,6 +155,16 @@ static JFrame frameMain;
         jScrollPane5 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
         jButton9 = new javax.swing.JButton();
+        jFrame5 = new javax.swing.JFrame();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jPasswordField1 = new javax.swing.JPasswordField();
+        jPasswordField2 = new javax.swing.JPasswordField();
+        jPasswordField3 = new javax.swing.JPasswordField();
+        jLabel14 = new javax.swing.JLabel();
+        jButton11 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -617,12 +635,14 @@ static JFrame frameMain;
                 return canEdit [columnIndex];
             }
         });
+        jTable2.setColumnSelectionAllowed(true);
         jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable2MouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(jTable2);
+        jTable2.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (jTable2.getColumnModel().getColumnCount() > 0) {
             jTable2.getColumnModel().getColumn(1).setResizable(false);
         }
@@ -720,6 +740,83 @@ static JFrame frameMain;
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
+        jFrame5.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        jFrame5.setTitle("Change Password");
+
+        jLabel11.setText("Current Password :");
+
+        jLabel12.setText("New Password      :  ");
+
+        jLabel13.setText("Current Password :");
+
+        jLabel14.setText("Change Password");
+
+        jButton11.setText("OK");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+
+        jButton12.setText("Cancel");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jFrame5Layout = new javax.swing.GroupLayout(jFrame5.getContentPane());
+        jFrame5.getContentPane().setLayout(jFrame5Layout);
+        jFrame5Layout.setHorizontalGroup(
+            jFrame5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jFrame5Layout.createSequentialGroup()
+                .addGroup(jFrame5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jFrame5Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(jFrame5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(32, 32, 32)
+                        .addGroup(jFrame5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jFrame5Layout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(66, 66, 66)
+                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(55, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jFrame5Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(110, 110, 110))
+        );
+        jFrame5Layout.setVerticalGroup(
+            jFrame5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jFrame5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jFrame5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jFrame5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jFrame5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(jFrame5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton11)
+                    .addComponent(jButton12))
+                .addContainerGap())
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Personal Encyclopedia");
 
@@ -759,6 +856,11 @@ static JFrame frameMain;
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem2.setText("Change Password");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
@@ -817,9 +919,9 @@ static JFrame frameMain;
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
+                .addGap(57, 57, 57)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(34, 34, 34)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -832,16 +934,35 @@ static JFrame frameMain;
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 String pass=password.getText();
 String user=username.getText();
-if(pass.equals("p")&&user.equals("p"))
-{    
-    frameMain.setVisible(true);
-    jFrame1.setVisible(false);
-    jFrame1.dispose();
+try{
+    Connection con = (Connection)DriverManager.getConnection("jdbc:mysql://localhost/personalenc",databaseuser,databasepass);
+    Statement stmt = con.createStatement();
+    String query;
+    query="Select * from admin where username='"+user+"' and password='"+pass+"';";
+    ResultSet rs = stmt.executeQuery(query);
+    int cout=0;           
+    while(rs.next())
+    {
+     cout++;
+    }
+    if(cout==0)
+    {
+        JOptionPane.showMessageDialog(this,"Entered Wrong Current Password");
+    }
+    else
+    {       
+        usernam=user;
+        frameMain.setVisible(true);
+        jFrame1.setVisible(false);
+        jFrame1.dispose();
+    }
+    stmt.close();
+    con.close();
 }
-else
+catch(Exception e)
 {
-    JOptionPane.showMessageDialog(this,"You Entered Wrong Password");
-}
+    JOptionPane.showMessageDialog(this,"Error in connectivity");
+} 
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -1099,6 +1220,57 @@ System.exit(0);        // TODO add your handling code here:
   jFrame3.setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        String currpass=jPasswordField1.getText();
+        String newpass=jPasswordField2.getText();
+        String conpass=jPasswordField2.getText();        
+        try{
+            Connection con = (Connection)DriverManager.getConnection("jdbc:mysql://localhost/personalenc",databaseuser,databasepass);
+            Statement stmt = con.createStatement();
+            String query;
+            query="Select * from admin where username='"+usernam+"' and password='"+currpass+"';";
+            ResultSet rs = stmt.executeQuery(query);
+            int cout=0;           
+            while(rs.next())
+            {
+             cout++;
+            }
+            if(cout==0)
+            {
+                JOptionPane.showMessageDialog(this,"Entered Wrong Current Password");
+                return;
+            }
+            if(!newpass.equals(conpass))
+            {
+                JOptionPane.showMessageDialog(this,"Password don't Match");
+                return;
+            }
+            int ans=JOptionPane.showConfirmDialog(this, "Are you sure you want to Change Password ?","Option",JOptionPane.YES_NO_OPTION);
+            if(ans!=JOptionPane.YES_OPTION)
+            return;
+            query = "update admin set password='"+newpass+"' where username='"+usernam+"';";
+            stmt.executeUpdate(query);
+            JOptionPane.showMessageDialog(this,"Password has been Updated");
+            jFrame5.dispose();
+            stmt.close();
+            con.close();
+
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this,"Error in connectivity");
+        }           // TODO add your handling code here:
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        jFrame5.dispose();
+        jFrame5.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        jFrame5.dispose();// TODO add your handling code here:
+    }//GEN-LAST:event_jButton12ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1147,6 +1319,8 @@ System.exit(0);        // TODO add your handling code here:
     private javax.swing.JButton addnewContent;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1163,8 +1337,13 @@ System.exit(0);        // TODO add your handling code here:
     private javax.swing.JFrame jFrame2;
     private javax.swing.JFrame jFrame3;
     private javax.swing.JFrame jFrame4;
+    private javax.swing.JFrame jFrame5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1182,6 +1361,9 @@ System.exit(0);        // TODO add your handling code here:
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JPasswordField jPasswordField2;
+    private javax.swing.JPasswordField jPasswordField3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
